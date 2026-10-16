@@ -79,13 +79,30 @@ echo "=========================================="
 echo "6. Cài đặt Tailscale & Flathub..."
 echo "=========================================="
 curl -fsSL https://tailscale.com/install.sh | sh
+sudo tailscale up
 
 # Bật Flathub và cài Trayscale làm GUI cho Tailscale
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub dev.deedles.Trayscale -y
 
 echo "=========================================="
-echo "7. Dọn dẹp hệ thống..."
+echo "7.Thiết lập vân tay ..."
+echo "=========================================="
+#Thiết lập vân tay
+sudo apt install meson cmake pkg-config libcrypto++-dev libusb-1.0-0-dev libcap-dev libseccomp-dev libglib2.0-dev libdbus-1-dev libfprint-2-dev libfprint-2-tod-dev libjson-glib-dev innoextract libssl-dev fprintd libpam-fprintd
+git clone https://github.com/Popax21/synaTudor.git
+cd synaTudor
+meson setup build
+ninja -C build
+sudo ninja -C build install
+sudo systemctl restart fprintd
+#Sau khi cài đặt xong, bạn tiến hành đăng ký vân tay bằng lệnh:
+fprintd-enroll
+#Kích hoạt xác thực hệ thống
+sudo pam-auth-update
+
+echo "=========================================="
+echo "8. Dọn dẹp hệ thống..."
 echo "=========================================="
 apt autoremove -y && apt clean
 
