@@ -79,6 +79,7 @@ rm /tmp/chrome.deb
 echo "=========================================="
 echo "6. Cài đặt Tailscale, Flathub & Trayscale..."
 echo "=========================================="
+sudo apt install git
 curl -fsSL https://tailscale.com/install.sh | sh
 
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
