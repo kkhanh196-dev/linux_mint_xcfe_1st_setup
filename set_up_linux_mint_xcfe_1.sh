@@ -102,7 +102,15 @@ fprintd-enroll
 sudo pam-auth-update
 
 echo "=========================================="
-echo "8. Dọn dẹp hệ thống..."
+echo "8.Cài đặt tiết kiệm pin TLP: ..."
+echo "=========================================="
+#Cài đặt TLP:
+sudo apt install tlp tlp-rdw -y
+#Kích hoạt và chạy TLP ngay lập tức:
+sudo tlp start
+
+echo "=========================================="
+echo "9. Dọn dẹp hệ thống..."
 echo "=========================================="
 apt autoremove -y && apt clean
 
