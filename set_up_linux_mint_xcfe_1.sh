@@ -70,11 +70,13 @@ chown -R "$SUDO_USER_NAME:$SUDO_USER_NAME" "$AUTOSTART_DIR"
 su - "$SUDO_USER_NAME" -c "dconf write /desktop/ibus/general/preload-engines \"['xkb:us::eng', 'bamboo']\"" 2>/dev/null || true
 
 echo "=========================================="
-echo "5. Cài đặt Google Chrome..."
+echo "5. Cài đặt Trình duyệt Brave..."
 echo "=========================================="
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb
-apt install -y /tmp/chrome.deb
-rm /tmp/chrome.deb
+sudo apt install curl
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+sudo curl -fsSLo /etc/apt/sources.list.d/brave-browser-release.sources https://brave-browser-apt-release.s3.brave.com/brave-browser.sources
+sudo apt update
+sudo apt install brave-browser
 
 echo "=========================================="
 echo "6. Cài đặt Tailscale, Flathub & Trayscale..."
